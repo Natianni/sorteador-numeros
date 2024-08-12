@@ -50,25 +50,19 @@ function limparCampo() {
 }
 
 
-function reiniciar(max, min) {
-    numeroGerado = gerarNumeroAleatorio(max, min);
-function reiniciar(max, min) {
-    numeroGerado = gerarNumeroAleatorio(max, min);
-    limparCampo();
-    document.getElementById('btn-reiniciar').setAttribute ('disabled', true);
+function reiniciar() { // Removi os parâmetros desnecessários (max, min) da função reiniciar.
+    limparCampo(); // Removi a linha duplicada que gerava número aleatório aqui, o que não fazia sentido.
+    document.getElementById('btn-reiniciar').setAttribute('disabled', true);
     escreverTextoNaTela('resultado', `<label id ="textoParagrafo" class="texto__paragrafo">Números sorteados: Nenhum até agora.</label>`);
 }
 
-function alertaErro (){
-    let priNumero= document.getElementById('de').value;
-    let segNumero = document.getElementById('ate').value;
+function alertaErro() { // Corrigi a função alertaErro
+    let priNumero = parseInt(document.getElementById('de').value); // Parse dos valores para garantir que são números.
+    let segNumero = parseInt(document.getElementById('ate').value);
 
-    if (segNumero <= priNumero) {
-        alert('Erro! O número máximo é menor que o mínimo, verifique se os digitou corretamente.');
-        reiniciar()
-        return true;
-    } return false;
-        reiniciar()
-        return true;
-    } return false;
+    if (segNumero <= priNumero) { // Condição corrigida para evitar duplicidade e erro de lógica.
+        alert('Erro! O número máximo é menor ou igual ao mínimo, verifique se os digitou corretamente.');
+        return true; // Removi a duplicidade de código que chamava reiniciar e retornava duas vezes.
+    }
+    return false; // Retorno correto após validação.
 }
